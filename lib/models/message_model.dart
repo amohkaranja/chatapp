@@ -40,7 +40,7 @@ final User olivia = User(
     name: 'Olivia',
     imageUrl: const AssetImage('assets/images/olivia.jpg'));
 final User sam = User(
-    id: 5, name: 'Sam', imageUrl: const AssetImage('assets/images/sam.jpg)'));
+    id: 5, name: 'Sam', imageUrl: const AssetImage('assets/images/sam.jpg'));
 final User sophia = User(
     id: 6,
     name: 'Sophia',

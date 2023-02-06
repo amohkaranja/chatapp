@@ -1,4 +1,3 @@
-import 'package:chatapp/models/message_model.dart';
 import 'package:chatapp/widgets/favorite_contacts.dart';
 import 'package:flutter/material.dart';
 
