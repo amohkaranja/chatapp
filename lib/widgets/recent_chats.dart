@@ -15,15 +15,22 @@ class RecentChats extends StatelessWidget {
                 topLeft: Radius.circular(30.0),
                 topRight: Radius.circular(30.0))),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
           child: ListView.builder(
             itemCount: chats.length,
             itemBuilder: (BuildContext context, int index) {
               final Message chat = chats[index];
               return Container(
-                margin: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 20.0),
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                margin:
+                    const EdgeInsets.only(top: 5.0, bottom: 5.0, right: 20.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 10.0),
+                decoration: BoxDecoration(
+                    color: chat.unread ? Color(0xFFFFEFEE) : Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20.0),
+                        bottomRight: Radius.circular(20.0))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -33,7 +40,7 @@ class RecentChats extends StatelessWidget {
                           radius: 35.0,
                           backgroundImage: chat.sender.imageUrl,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10.0,
                         ),
                         Column(
@@ -41,19 +48,19 @@ class RecentChats extends StatelessWidget {
                           children: [
                             Text(
                               chat.sender.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5.0,
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.45,
                               child: Text(
                                 chat.text,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.blueGrey,
                                     fontSize: 15.0,
                                     fontWeight: FontWeight.w600),
@@ -65,7 +72,31 @@ class RecentChats extends StatelessWidget {
                       ],
                     ),
                     Column(
-                      children: <Widget>[Text(chat.time), const Text('New')],
+                      children: <Widget>[
+                        Text(chat.time,
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold)),
+                        SizedBox(height: 5.0),
+                        chat.unread
+                            ? Container(
+                                width: 40.0,
+                                height: 20.0,
+                                decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(30.0)),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'New',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            : Text('')
+                      ],
                     )
                   ],
                 ),
