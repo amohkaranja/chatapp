@@ -77,6 +77,18 @@ class _ChatScreenState extends State<ChatScreen> {
           icon: Icon(Icons.photo),
           iconSize: 25.0,
           color: Colors.red,
+        ),
+        Expanded(
+            child: TextField(
+          textCapitalization: TextCapitalization.sentences,
+          onChanged: (value) {},
+          decoration: InputDecoration.collapsed(hintText: "send a message...."),
+        )),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.send),
+          iconSize: 25.0,
+          color: Colors.red,
         )
       ]),
     );
@@ -101,33 +113,36 @@ class _ChatScreenState extends State<ChatScreen> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30.0),
+                          topRight: Radius.circular(30.0))),
+                  child: ClipRRect(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30.0),
-                        topRight: Radius.circular(30.0))),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30.0),
-                      topRight: Radius.circular(30.0)),
-                  child: ListView.builder(
-                    reverse: true,
-                    padding: EdgeInsets.only(top: 15.0),
-                    itemCount: messages.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final message = messages[index];
-                      final bool issMe = message.sender.id == currentUser.id;
-                      return _buildMessage(message, issMe);
-                    },
-                  ),
-                )),
-          ),
-          _buildMessageComposer(),
-        ],
+                        topRight: Radius.circular(30.0)),
+                    child: ListView.builder(
+                      reverse: true,
+                      padding: EdgeInsets.only(top: 15.0),
+                      itemCount: messages.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final message = messages[index];
+                        final bool issMe = message.sender.id == currentUser.id;
+                        return _buildMessage(message, issMe);
+                      },
+                    ),
+                  )),
+            ),
+            _buildMessageComposer(),
+          ],
+        ),
       ),
     );
   }
